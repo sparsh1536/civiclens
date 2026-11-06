@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Activity, Bookmark, Building2, ChartNoAxesCombined, FileCheck2, FileText, Flag, Globe2, Landmark, LayoutDashboard, Library, ShieldCheck, Wallet } from 'lucide-react';
+import { Bookmark, ChartNoAxesCombined, FileCheck2, FileText, Flag, Globe2, Landmark, LayoutDashboard, Library, ShieldCheck } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { signOut } from '@/app/actions';
 
