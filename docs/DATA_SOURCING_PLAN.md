@@ -12,8 +12,9 @@ Start with a balanced, cross-party collection of manifesto commitments from the 
 
 | Source | Use | URL |
 |---|---|---|
-| Bharatiya Janata Party, Sankalp Patra 2024 | Primary source for BJP 2024 Lok Sabha commitments | https://www.bjp.org/manifesto |
+| Bharatiya Janata Party, Sankalp Patra 2024 | Primary source for BJP 2024 Lok Sabha commitments | https://www.bjp.org/files/2024-04/Modi-Ki-Guarantee-Sankalp-Patra-English.pdf |
 | Indian National Congress, Nyay Patra 2024 | Primary source for INC 2024 Lok Sabha commitments | https://inc.in/media/manifesto |
+| Parliament of India, Digital Sansad manifesto library | Official archive of national and state party manifestos | https://sansad.in/ls/library/manifestos |
 | Election Commission of India | Election context and official election records | https://www.eci.gov.in/ |
 | Union Budget documents, Ministry of Finance | Annual budget estimates, revised estimates, actuals and implementation documents | https://www.indiabudget.gov.in/ |
 | Press Information Bureau | Official ministry announcements and implementation updates; corroboration, not a substitute for outcome evidence | https://pib.gov.in/ |
