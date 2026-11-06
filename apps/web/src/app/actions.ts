@@ -45,8 +45,7 @@ export async function createCommitmentDraft(formData: FormData) {
   const required = ['jurisdiction_id','party_name','election_type','election_date','manifesto_title','manifesto_url','promise_title','promise_description','category','evidence_title','evidence_publisher','evidence_type','evidence_url'];
   if (required.some((key) => !value(formData, key))) redirect('/editor/new?error=required');
 
-  const urlFields = ['manifesto_url','evidence_url'];
-  for (const key of urlFields) {
+  for (const key of ['manifesto_url','evidence_url']) {
     try {
       const url = new URL(value(formData, key));
       if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Invalid protocol');
@@ -59,8 +58,9 @@ export async function createCommitmentDraft(formData: FormData) {
   const partyAbbreviation = nullable(formData, 'party_abbreviation');
   let partyQuery = supabase.from('political_parties').select('id').eq('name', partyName);
   partyQuery = partyAbbreviation ? partyQuery.eq('abbreviation', partyAbbreviation) : partyQuery.is('abbreviation', null);
-  let { data: party, error: partyLookupError } = await partyQuery.maybeSingle();
-  if (partyLookupError) redirect('/editor/new?error=party');
+  const partyLookup = await partyQuery.maybeSingle();
+  if (partyLookup.error) redirect('/editor/new?error=party');
+  let party = partyLookup.data;
   if (!party) {
     const inserted = await supabase.from('political_parties')
       .insert({ name: partyName, abbreviation: partyAbbreviation }).select('id').single();
@@ -70,10 +70,11 @@ export async function createCommitmentDraft(formData: FormData) {
 
   const electionType = value(formData, 'election_type');
   const electionDate = value(formData, 'election_date');
-  let { data: election, error: electionLookupError } = await supabase.from('elections')
+  const electionLookup = await supabase.from('elections')
     .select('id').eq('jurisdiction_id', value(formData, 'jurisdiction_id'))
     .eq('election_type', electionType).eq('election_date', electionDate).maybeSingle();
-  if (electionLookupError) redirect('/editor/new?error=election');
+  if (electionLookup.error) redirect('/editor/new?error=election');
+  let election = electionLookup.data;
   if (!election) {
     const inserted = await supabase.from('elections').insert({
       jurisdiction_id: value(formData, 'jurisdiction_id'), election_type: electionType,
@@ -83,9 +84,10 @@ export async function createCommitmentDraft(formData: FormData) {
     election = inserted.data;
   }
 
-  let { data: manifesto, error: manifestoLookupError } = await supabase.from('manifestos')
+  const manifestoLookup = await supabase.from('manifestos')
     .select('id').eq('election_id', election.id).eq('party_id', party.id).eq('language_code', 'en').maybeSingle();
-  if (manifestoLookupError) redirect('/editor/new?error=manifesto');
+  if (manifestoLookup.error) redirect('/editor/new?error=manifesto');
+  let manifesto = manifestoLookup.data;
   if (!manifesto) {
     const inserted = await supabase.from('manifestos').insert({
       election_id: election.id, party_id: party.id, title: value(formData, 'manifesto_title'),
@@ -158,13 +160,11 @@ export async function createAssessmentDraft(formData: FormData) {
   }).select('id').single();
   if (created.error || !created.data) redirect(`/editor/promises/${promiseId}?error=assessment`);
 
-  if (evidenceIds.length) {
-    const linked = await supabase.from('assessment_evidence').insert(evidenceIds.map((evidenceId) => ({
-      assessment_id: created.data.id, evidence_id: evidenceId,
-      supports_assessment: true, explanation: 'Evidence reviewed in support of this assessment.',
-    })));
-    if (linked.error) redirect(`/editor/promises/${promiseId}?error=evidence_link&assessment=${created.data.id}`);
-  }
+  const linked = await supabase.from('assessment_evidence').insert(evidenceIds.map((evidenceId) => ({
+    assessment_id: created.data.id, evidence_id: evidenceId,
+    supports_assessment: true, explanation: 'Evidence reviewed in support of this assessment.',
+  })));
+  if (linked.error) redirect(`/editor/promises/${promiseId}?error=evidence_link&assessment=${created.data.id}`);
   revalidatePath(`/editor/promises/${promiseId}`);
   redirect(`/editor/promises/${promiseId}?created=${created.data.id}`);
 }
@@ -218,7 +218,7 @@ export async function publishCommitmentBundle(formData: FormData) {
   if (!roles?.some((item: { role: string }) => item.role === 'admin')) redirect('/editor?error=access');
   const promiseId = value(formData, 'promise_id');
   const { error } = await supabase.rpc('publish_commitment_bundle', { p_promise_id: promiseId });
-  if (error) redirect(`/editor/publication?error=publish`);
+  if (error) redirect('/editor/publication?error=publish');
   revalidatePath('/editor');
   revalidatePath('/editor/publication');
   revalidatePath('/promises');
