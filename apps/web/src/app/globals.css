@@ -18,3 +18,42 @@
 @media(max-width:700px){.editor-actions{margin-top:18px}.review-evidence-grid{grid-template-columns:1fr}.editor-assessment{display:block}.editor-assessment form{margin-top:14px}.review-decision-actions{flex-direction:column}.review-decision-actions button{width:100%}}
 .publication-list{display:grid;gap:12px}.publication-card{background:#fbfaf6;border:1px solid var(--line,#dfddd4);border-radius:6px;padding:18px}.publication-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.publication-card h3{font:500 19px var(--serif,Georgia);margin:7px 0}.publication-card p{font-size:10px;color:#898b82}.publication-checks{display:flex;flex-wrap:wrap;gap:10px 18px;border-top:1px solid #e8e6df;border-bottom:1px solid #e8e6df;padding:12px 0;margin:14px 0}.publication-checks span{display:flex;align-items:center;gap:6px;font-size:9px;color:#777970}.publication-checks svg{color:#82927e}.publication-source-list{display:grid;gap:7px}.publication-source-list>div{display:flex;justify-content:space-between;gap:12px;font-size:10px}.publication-source-list small{font:9px var(--mono,monospace);color:#92938a}.publication-card-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;border-top:1px solid #e8e6df;margin-top:15px;padding-top:14px}.publication-card-footer form button{display:inline-flex;align-items:center;gap:7px;border:1px solid #a74638;background:#a74638;color:white;border-radius:4px;padding:10px 13px;font:600 10px var(--sans,Arial);cursor:pointer}.publication-card-footer form button:disabled{opacity:.4;cursor:not-allowed}.publication-warning{background:#f5e9e6;border:1px solid #e9d3ce;color:#9c4438;padding:9px 11px;border-radius:4px}.publication-card-footer form button:hover:not(:disabled){background:#87372f}
 @media(max-width:700px){.publication-card-footer{align-items:stretch;flex-direction:column}.publication-card-footer form button{width:100%;justify-content:center}.publication-source-list>div{display:grid}}
+
+/* CivicLens dark workspace — evidence-led editorial interface */
+:root{color-scheme:dark;--bg:#101311;--paper:#171c19;--ink:#e8e9e2;--muted:#a0a79e;--line:#303832;--red:#df8174;--red-soft:#352522;--green:#91b49a}
+html,body{background:#101311;color:#e8e9e2}
+.main-panel,.content,.records-page,.editor-page{background:#101311;color:#e8e9e2}
+.topbar{background:#141916;border-color:#303832}
+.breadcrumb strong,.top-signin{color:#e2e5dd}
+.breadcrumb,.live-indicator,.section-note,.eyebrow,.hero-copy,.hero-aside p,.filter-label,.metric-top,.metric-foot,.jurisdiction,.promise-title small,.sample-note,.section-description,.module-card p,.footer,.records-content p,.editor-lede,.editor-section-heading>span,.editor-steps p,.editor-footnote,.assessment-meta,.detail-facts dt,.detail-aside p,.empty-inline p{color:#a0a79e}
+.hero-row h1,.section-heading h2,.metric-value,.module-card h3,.records-content h1,.records-content h2,.detail-content h1,.detail-content h2,.editor-content h1,.editor-content h2,.editor-content h3{color:#edf0e8}
+.hero-row h1 em,.records-content h1 em,.detail-content h1 em,.editor-content h1 em{color:#df8174}
+.hero-aside,.eyebrow-line{border-color:#38423b}
+.filter-bar,.filter-chip,.search-button,.metric-card,.table-wrap,.module-card,.record-card,.empty-dashboard,.empty-state,.detail-aside,.detail-section,.editor-stats article,.editor-draft,.editor-notice,.editor-steps,.editor-assessment,.review-evidence,.review-claim,.publication-card,.evidence-card,.empty-inline{background:#171e1a;border-color:#303a33;color:#e1e6de}
+.filter-chip,.search-button,.records-filters input,.records-filters select,.editor-form input,.editor-form select,.editor-form textarea,.editor-form-footer,.evidence-picker{background:#111713;color:#e5e9e2;border-color:#3a453d}
+.table-head{background:#202923;color:#b2b9af}
+.promise-row,.detail-facts>div,.publication-checks,.publication-card-footer{border-color:#303a33}
+.status-pill.pending{background:#2b302a;color:#c0c6b9}
+.status-pill.review{background:#382b25;color:#e2ad8d}
+.status-pill.progress{background:#233329;color:#a9c9ad}
+.text-link,.hero-aside a,.review-evidence a,.source-link{color:#e18a7d}
+.empty-dashboard p,.empty-state p,.record-card p,.editor-assessment p,.review-evidence p,.review-claim>p,.publication-card p,.evidence-card p{color:#aab1a7}
+.editor-primary,.editor-form-footer button,.review-decision-actions button,.publication-card-footer form button{background:#a74638;color:#fff}
+.editor-secondary,.review-decision-actions .editor-secondary{background:#202923;color:#e1e6de;border-color:#3b463e}
+.editor-error,.publication-warning{background:#382522;border-color:#694139;color:#f0a397}
+.editor-success{background:#203328;border-color:#385b43;color:#b9d6bd}
+.record-meta,.record-category,.records-label,.records-eyebrow,.section-kicker,.aside-index,.module-tag,.metric-top,.records-count span{color:#b2a79a}
+.record-card:hover,.editor-draft:hover,.module-card:hover{border-color:#8a6259}
+a{outline-offset:3px}
+input,select,textarea{color-scheme:dark}
+::selection{background:#78443c;color:#fff}
+@media(max-width:760px){
+ .sidebar{position:sticky;top:0;z-index:30;height:auto;background:#1a211c;border-bottom:1px solid #344037;padding:12px 15px}
+ .brand{padding:0}
+ .workspace-label{display:block;padding:14px 4px 7px}
+ .nav-group{display:flex;gap:5px;overflow-x:auto;padding-bottom:3px}
+ .nav-link{white-space:nowrap;flex:0 0 auto;padding:9px 10px}
+ .library-label{margin-top:7px}
+ .sidebar-bottom{display:none}
+ .main-panel{min-width:0}
+}
