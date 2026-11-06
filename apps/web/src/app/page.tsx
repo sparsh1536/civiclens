@@ -42,7 +42,7 @@ export default async function Home() {
         <span className="nav-link disabled-link"><Landmark size={17}/> Parliament watch <small>SOON</small></span>
       </nav>
       <div className="workspace-label library-label">RESEARCH</div>
-      <nav className="nav-group" aria-label="Research navigation"><span className="nav-link disabled-link"><Library size={17}/> Source library <small>SOON</small></span><Link className="nav-link" href="/saved"><Bookmark size={17}/> Saved research</Link>{user && <Link className="nav-link" href="/editor"><FileCheck2 size={17}/> Editorial desk</Link>}</nav>
+      <nav className="nav-group" aria-label="Research navigation"><span className="nav-link disabled-link"><Library size={17}/> Source library <small>SOON</small></span><Link className="nav-link" href="/saved"><Bookmark size={17}/> Saved research</Link>{user && <a className="nav-link" href="/editor"><FileCheck2 size={17}/> Editorial desk</a>}</nav>
       <div className="sidebar-bottom"><div className="integrity-card"><ShieldCheck size={17}/><div><strong>Evidence first</strong><p>Every assessment is traceable to its sources.</p></div></div><div className="profile-link"><span className="avatar">{user?.email?.[0]?.toUpperCase() ?? 'G'}</span><span><strong>{user ? 'Your account' : 'Guest researcher'}</strong><small>{user ? user.email : 'Sign in to save research'}</small></span>{user ? <form action={signOut}><button className="text-button" type="submit">Sign out</button></form> : <Link href="/sign-in" className="text-button">Sign in</Link>}</div></div>
     </aside>
     <section className="main-panel">
