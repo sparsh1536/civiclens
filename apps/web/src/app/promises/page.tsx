@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowLeft, ArrowUpRight, FileCheck2, Search, ShieldCheck } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
+import { WorkspaceShell } from '@/components/workspace-shell';
 
 const statusLabel: Record<string, string> = {
   not_assessed: 'Not assessed', not_started: 'Not started', in_progress: 'In progress',
@@ -26,7 +27,7 @@ export default async function PromisesPage({ searchParams }: { searchParams: Pro
     errorMessage = result.error?.message ?? '';
   }
 
-  return <main className="records-page">
+  return <WorkspaceShell active="promises"><main className="records-page">
     <header className="records-top"><Link href="/" className="back-link"><ArrowLeft size={15}/> CivicLens</Link><span className="records-label">PUBLIC COMMITMENT REGISTER</span></header>
     <section className="records-content">
       <div className="records-eyebrow"><span/> PROMISE TRACKER · INDIA</div>
@@ -41,5 +42,5 @@ export default async function PromisesPage({ searchParams }: { searchParams: Pro
       })}</div> : <div className="empty-state"><span className="empty-icon"><FileCheck2 size={21}/></span><h2>No published commitments yet.</h2><p>{q || status ? 'Try changing your search or status filter.' : 'The public register is ready for verified records. No draft or unpublished commitments are shown here.'}</p><Link href="/" className="text-link">Back to overview <ArrowUpRight size={14}/></Link></div>}
       <p className="records-integrity"><ShieldCheck size={14}/> Only records explicitly marked as published are displayed. Assessments are not inferred from incomplete data.</p>
     </section>
-  </main>;
+  </main></WorkspaceShell>;
 }
